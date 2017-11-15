@@ -84,6 +84,30 @@ public class Simple {
             }
         }
     }
+	
+	
+	 /**
+     * 直接插入排序
+     *
+     * 例子：57 68 59
+     * 首先 68 和 57 比较，因为顺序正确跳过内层 for
+     * 然后 59 和 68 比较，因为 68（data[j]） 大，进入内循环，将其往后移（移到 temp 的位置上）
+     * 此时的顺序为：57 68 68
+     * 然后 temp 59 继续和 57 比较，顺序正确跳出内循环
+     * 最后将 j + 1 位置（第二个）替换为 temp
+     */
+    private static void insertSort(int[] data) {
+        for (int i = 1; i < data.length; i++) {
+            int temp = data[i];  // 要处理的数
+            int j = i - 1;
+            for (; j >= 0 && temp < data[j]; j--) {
+                // 将大于排序的数的值整体往后移
+                data[j + 1] = data[j];
+            }
+            // 将处理的数（temp）放在正确的位置上
+            data[j + 1] = temp;
+        }
+    }
 
 
     private static void printData(int[] data) {
