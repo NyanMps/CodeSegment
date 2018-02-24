@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <!-- 指定Action对象由谁创建 -->
+    <constant name="struts.objectFactory" value="spring"/>
+    <!-- 指定所要处理请求的后缀 -->
+    <!--
+    <constant name="struts.action.extension" value="do,action"></constant>
+    -->
+    <!-- 指定默认编码 -->
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <!-- 指定是否使用缓存 默认true 开发最好使用false -->
+    <constant name="struts.serve.static.browserCache" value="false"/>
+    <!-- 指定是否自动加载修改后的Struts.xml 默认false 开发最好使用true -->
+    <constant name="struts.configuration.xml.reload" value="true"/>
+    <!-- 指定是否启用开发模式，可以打印更详细的错误信息 默认false 开发最好使用true -->
+    <constant name="struts.devMode" value="true"/>
+    <!-- 指定上传文件的大小限制 -->
+    <constant name="struts.multipart.maxSize" value="10701096"/>
+
+    <!-- 配置Action  不用写全名，因为已经交给Spring管理 -->
+    <package name="user" namespace="/test" extends="struts-default">
+        <action name="userList" class="userList">
+            <result name="list">/WEB-INF/page/user.jsp</result>
+        </action>
+    </package>
+</struts>

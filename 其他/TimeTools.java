@@ -8,7 +8,7 @@ import java.util.Date;
  *
  * 包含判断时间是否超过五分钟
  */
-public class OtherTools {
+public class TimeTools {
 
     public static boolean isOverstepMinute(Date date){
         Calendar cal = Calendar.getInstance();

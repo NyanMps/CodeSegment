@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 结合Spring和Mybatis -->
+    <bean id = "sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--注入数据源-->
+        <property name="dataSource" ref="dataSource" />
+        <!--指定MyBatis的配置文件-->
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
+        <!-- 自动扫描mapping.xml文件 -->
+        <property name = "mapperLocations" value="classpath:mybatis/mappers/UserMapper.xml" />
+        <!--设置别名扫描-->
+        <property name="typeAliasesPackage" value="com.bfchengnuo.pojo" />
+    </bean>
+
+    <!--<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
+        <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+        <!--<property name="mapperInterface" value="com.bfchengnuo.mapper.UserMapper" />-->
+    <!--</bean>-->
+
+    <!-- 扫描包，Spring 会自动查找其下的类（mapper），将其实例化 -->
+    <bean class = "org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name = "basePackage" value="com.bfchengnuo.mapper" />
+        <!--多数据源的时候使用-->
+        <!--<property name = "sqlSessionFactoryBeanName" value = "sqlSessionFactory" />-->
+    </bean>
+
+    <!--配置通用 Mapper-->
+    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.bfchengnuo.mapper"/>
+    </bean>
+
+</beans>
