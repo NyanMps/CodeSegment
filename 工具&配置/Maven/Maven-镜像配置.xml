@@ -1,0 +1,99 @@
+
+这样配置，maven就可以从私服下载构件了，但是会有个问题，他还会时不时的请求中央仓库，如果想完全让maven访问nexus私服，需要设置镜像 mirrors 来支持。
+
+<profiles>
+    <profile>
+      <id>nexus</id>
+      <repositories>
+        <repository>
+          <id>nexus</id>
+          <name>crop-nexus</name>
+          <url>http://你的NexusIP:8081/nexus/content/groups/public/</url>
+          <releases>
+                <!-- true表示开启仓库发布版本下载，false表示禁止 -->
+                <enabled>true</enabled>
+
+        </releases>
+        <snapshots>
+            <!-- true表示开启仓库快照版本下载，false表示禁止 -->
+            <enabled>true</enabled>
+
+        </snapshots>
+       </repository>
+     </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus</id>
+            <url> http://你的NexusIP:8081/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <!-- 禁止快照版本，防止不稳定的插件影响项目构建 -->
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+   </profile>
+ </profiles>
+<!-- 激活nexus私服 -->
+ <activeProfiles>
+   <activeProfile>nexus</activeProfile>
+ </activeProfiles>
+ 
+ 
+ 
+ <mirrors>
+    <mirror>
+         <id>nexus</id>
+         <mirrorOf>*</mirrorOf>
+         <name>crop-nexus</name>
+         <url>http://你的nexusIP:8081/nexus/content/groups/public/</url>
+   </mirror>
+ </mirrors>
+ 
+ 
+ ----------------另一个版本----------------------
+ <mirrors>
+    <mirror>
+      <id>central</id>
+      <mirrorOf>*</mirrorOf>
+      <name>Human Readable Name for this Mirror.</name>
+      <url>http://localhost:8081/nexus/content/groups/public/</url>
+    </mirror>
+  </mirrors>
+  <profiles>
+    <profile>
+      <id>nexus</id>
+      <repositories>
+        <repository>
+          <id>nexus</id>
+          <name>Nexus</name>
+          <url>http://localhost:8081/nexus/content/groups/public/</url>
+            <releases>
+			<enabled>true</enabled>
+		  </releases>
+          <snapshots>
+			<enabled>true</enabled>
+		  </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+</profiles>
+
+
+-------------------在POM中配置的话（只在当前工程有效）----------------
+<repositories>
+      <repository>
+          <id>nexus</id>
+          <name>Nexus Repository</name>
+          <url>http://localhost:8081/nexus/content/groups/public/</url>
+          <releases>
+              <enabled>true</enabled>
+          </releases>
+          <snapshots>
+              <enabled>true</enabled>
+          </snapshots>
+      </repository>
+  </repositories>
