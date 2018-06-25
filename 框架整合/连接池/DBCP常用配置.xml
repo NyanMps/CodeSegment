@@ -1,0 +1,97 @@
+<bean id="dataSourceDataWare" class="org.apache.commons.dbcp.BasicDataSource"
+	scope="singleton">
+	
+	<!-- 配置数据驱动、数据库URL、用户名、用户密码 -->
+	<property name="driverClassName">
+		<value>${jdbc.LDataWare.driver}</value>
+	</property>
+	<property name="url">
+		<value>${jdbc.LDataWare.url}</value>
+	</property>
+	<property name="username">
+		<value>${jdbc.LDataWare.username}</value>
+	</property>
+	<property name="password">
+		<value>${jdbc.LDataWare.password}</value>
+	</property>
+
+	<!-- Statement 默认超时时间，单位:秒 -->
+	<property name="defaultQueryTimeout" value="3" />
+	<!-- 默认是否自动提交事务，默认为true -->
+	<property name="defaultAutoCommit" value="false" />
+	<!-- 数据库连接属性，(不同的数据库配置不一样) -->
+	<property name="connectionProperties" value="connectTimeout=2000;socketTimeout=2000" />
+	<!-- 连接池队列类型默认为LIFO,false表示FIFO -->
+	<property name="lifo" value="false" />
+	<!-- 建议以下值尽量一样,没必要频繁地过期空闲连接(除非出现连接池资源紧缺等情况才可以考虑) -->
+	<!-- 连接池初始化时创建的连接数 -->
+	<property name="initialSize">
+		<value>1</value>
+	</property>
+	<!-- 连接池中最小的空闲的连接数，低于这个数量会被创建新的连接 -->
+	<property name="minIdle">
+		<value>1</value>
+	</property>
+	<!-- 最大空闲数，数据库连接的最大空闲时间。超过空闲时间，数据库连 接将被标记为不可用，然后被释放。设为0表示无限制。 -->
+	<property name="maxIdle">
+		<value>5</value>
+	</property>
+	<!-- 可以同时从该池中分配的最大连接数 -->
+	<property name="maxTotal">
+		<value>5</value>
+	</property>
+	<!-- 最大活动连接数，这里取值为20，表示同时最多有20个数据库连 接 -->
+	<property name="maxActive">
+		<value>20</value>
+	</property>
+	<!--这是等待获取连接池连接时间,也不要太大,比如设置在500毫秒 -->
+	<property name="maxWaitMillis">
+		<value>500</value>
+	</property>
+	<!--验证数据库连接是否有效/可用 -->
+	<!--从池中获取连接时进行validateConnection,默认为true -->
+	<property name="testOnBorrow">
+		<value>false</value>
+	</property>
+	<!--新建连接时进行validateConnection,默认为false -->
+	<property name="testOnCreate">
+		<value>false</value>
+	</property>
+	<!--将连接释放回池时进行validateConnection,默认为false -->
+	<property name="testOnReturn">
+		<value>false</value>
+	</property>
+	<!-- 如果不设置，则将调用 Connection#isValid(int timeout)验证数据库是否有效 -->
+	<property name="validationQuery" value="" />
+	<!-- 连接存活的最长时间，<=0禁用该配置 -->
+	<property name="maxConnLifetimeMillis" value="0" />
+	<!-- 驱除定时器执行周期，<=0禁用该配置 -->
+	<property name="timeBetweenEvictionRunsMillis" value="0" />
+	<!-- 连接空闲多久从池中移除，<=0不做判断 -->
+	<!-- mindle <当前空闲连接数量，使用这个时间测试 -->
+	<property name="softMinEvictableIdleTimeMillis" value="0" />
+	<!-- 连接空闲多久从池中移除,与softMinEvictableIdleTimeMillis是或关系 -->
+	<property name="minEvictableIdleTimeMillis" value="0" />
+	<!-- 每次测试多少空闲对象，<=0相当于禁用 -->
+	<property name="numTestsPerEvictionRun" value="0" />
+	<!-- 当连接空闲时是否测试，即保持连接一直存活,配合驱除定时器使用 -->
+	<property name="testWhileIdle">
+		<value>false</value>
+	</property>
+	<!-- 判断连接是否需要驱除的策略,默认为DefaultEvictionPolicy -->
+	<property name="evictionPolicyClassName"
+		value="org.apache.commons.pool2.impl.DefaultEvictionPolicy" />
+	<!-- 移除无引用连接(那些没有close的连接),此处设置为false，需要保证程序中连接一定释放 -->
+	<property name="removeAbandonedOnBorrow">
+		<value>false</value>
+	</property>
+
+	<property name="removeAbandonedOnMaintenance">
+		<value>false</value>
+	</property>
+
+	<!-- 超时后将自动关闭无引用连接，单位:秒 -->
+	<property name="removeAbandonedTimeout">
+		<value>180</value>
+	</property>
+</bean>

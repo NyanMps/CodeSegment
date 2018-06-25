@@ -1,0 +1,9 @@
+<action name="export2Excel" class="com.bfchengnuo.action.UpdateAction" method="export2Excel">
+	<result type="stream">
+		<!-- 流的来源 -->
+		<param name="inputName">is</param>
+		<param name="contentDisposition">
+			attachment;filename=emp.xlsx
+		</param>
+	</result>
+</action>
