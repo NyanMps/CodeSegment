@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="book" extends="json-default">
+		<action name="*_book" class="bookAction" method="{1}">
+			<result name="queryBookById_suc" type="json">
+				<param name="root">book</param>
+			</result>
+			<result name="deletepic_suc" type="json">
+				<param name="root">flag</param>
+			</result>
+			<result name="settingFm_suc" type="json">
+				<param name="root">flag</param>
+			</result>
+			<result name="querySome_suc" type="json">
+				<param name="root">page</param>
+				<param name="excludeProperties">
+					rows.book.bps.book
+				</param>
+			</result>
+			<result name="queryAllCas_suc" type="json">
+				<param name="root">data</param>
+			</result>
+			<result name="addca_suc" type="redirect">
+				addca.jsp
+			</result>
+			<result name="addbook_suc" type="redirect">
+				addbook.jsp
+			</result>
+			
+			<allowed-methods>queryBookById,deletepic,setFm,querySome,queryAllCas,addca,addbook</allowed-methods>
+		</action>
+		
+		<action name="export2Excel" class="bookAction" method="export2Excel">
+			 <result type="stream">
+                <!-- 流的来源 -->
+                <param name="inputName">is</param>
+                <param name="contentDisposition">
+                    attachment;filename=emp.xlsx
+                </param>
+            </result>
+		</action>
+		
+		<action name="addpic" class="picAction">
+			<result type="json">flag</result>
+		</action>
+		
+	</package>
+</struts>
