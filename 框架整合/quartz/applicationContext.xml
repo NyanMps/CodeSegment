@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="job" class="com.bfchengnuo.job.Job2"/>
+	
+	<!-- 任务, 默认任务名：id 名；默认任务组名称：DEFAULT -->
+	<bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="job"/>
+		<property name="targetMethod" value="job"/>
+		
+		<property name="name" value="job2"/>
+		<property name="group" value="g_job2"/>
+		
+		<!-- 同步操作，默认异步 -->
+		<property name="concurrent" value="false"/>
+	</bean>
+
+	<!-- 触发器调用任务 -->
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="jobDetail"/>
+		<!-- 触发条件 表达式 -->
+		<property name="cronExpression" value="0/2 * * * * ?"/>
+		
+		<property name="name" value="cron"/>
+		<property name="group" value="g_cron"/>
+	</bean>
+	
+	<!-- 调度器，监视器 -->
+	<bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cronTrigger"/>
+			</list>
+		</property>
+	</bean>
+</beans>

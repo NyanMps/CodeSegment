@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd 
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <context:annotation-config/>
+
+    <!-- ActiveMQ 提供的ConnectionFactory -->
+    <bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <!-- 配置 brokerURL，这里为你自己开启 ActiveMQ 服务的地址-->
+        <property name="brokerURL" value="tcp://192.168.248.136:61616"/>
+    </bean>
+
+    <!-- Spring 提供的连接池 -->
+    <bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+        <property name="targetConnectionFactory" ref="activeMQConnectionFactory"/>
+    </bean>
+
+    <!-- 
+        点对点或队列模型
+        配置队列的目的地 
+    -->
+    <bean id="activeMQQueue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg name="name" value="spring-jms-queue"/>
+    </bean>
+
+    <!-- 
+        发布者／订阅者模型
+        配置主题的目的地 
+    -->
+    <bean id="activeMQTopic" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg name="name" value="spring-jms-topic"/>
+    </bean>
+</beans>
