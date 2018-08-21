@@ -69,3 +69,10 @@ xx.delete = function () {
         });
     }
 };
+
+// 加载中效果，屏蔽用户操作
+var loadIndex = parent.layer.load(1, {
+  shade: [0.1,'#fff'] //0.1 透明度的白色背景
+});
+// 关闭遮罩
+parent.layer.close(loadIndex);
