@@ -76,3 +76,14 @@ var loadIndex = parent.layer.load(1, {
 });
 // 关闭遮罩
 parent.layer.close(loadIndex);
+
+// 输入层
+layer.prompt({
+  formType: 2,
+  value: '初始值',
+  title: '请输入值',
+  area: ['800px', '350px'] //自定义文本域宽高
+}, function(value, index, elem){
+  alert(value); //得到value
+  layer.close(index);
+});

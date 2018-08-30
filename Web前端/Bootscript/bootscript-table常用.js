@@ -91,3 +91,18 @@ ContractMarks.delete = function (id) {
         });
     });
 };
+
+/**
+ * 加载完毕的回调
+ * 与 onPostBody 区分，onPostBody 会调用多次
+ * 相关链接：https://github.com/wenzhixin/bootstrap-table/issues/2920
+ *    http://bootstrap-table.wenzhixin.net.cn/documentation/#events
+ */
+$('#table').bootstrapTable({
+  onLoadSuccess: function() {
+    console.log("初始化完成");
+  }
+});
+$('#BillingApplyDetailTable').on('onLoadSuccess', function () {
+  console.log("初始化完成");
+});
