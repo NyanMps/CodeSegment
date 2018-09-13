@@ -106,3 +106,22 @@ $('#table').bootstrapTable({
 $('#BillingApplyDetailTable').on('onLoadSuccess', function () {
   console.log("初始化完成");
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// -------------------------------------------------------------------------------
+
+// 引用地址：
+//    关于使用server端分页，如何保存用户所有的复选框选择问题  https://github.com/wenzhixin/bootstrap-table/issues/917

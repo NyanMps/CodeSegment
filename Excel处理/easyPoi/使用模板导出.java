@@ -14,14 +14,14 @@ public void export(ModelMap modelMap, HttpServletRequest request, HttpServletRes
 	// 获取导出excel指定模版
 	TemplateExportParams params = new TemplateExportParams(path);
 	// 标题开始行
-	params.setHeadingStartRow(0);
+	// params.setHeadingStartRow(0);
 	// 标题行数
-	params.setHeadingRows(2);
+	// params.setHeadingRows(2);
 	// 设置sheetName，若不设置该参数，则使用得原本得sheet名称
-	params.setSheetName("N+13周计划");
-	params.setTempParams("t");
+	// params.setSheetName("N+13周计划");
+	// params.setTempParams("t");
 	Map<String,Object> data = Maps.newHashMap();
-	data.put("list", list);
+	data.put("entityList", list);
 	modelMap.put(TemplateExcelConstants.MAP_DATA, data);
 	modelMap.put(TemplateExcelConstants.PARAMS, params);
 	modelMap.put(TemplateExcelConstants.FILE_NAME, "N+13周计划" + DateUtil.getDays());
